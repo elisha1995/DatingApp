@@ -12,17 +12,17 @@ public class MembersController(AppDbContext context) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<AppUser>>> GetMembers()
     {
-        var users = await context.Users.ToListAsync();
-        return users;
+        var members = await context.Users.ToListAsync();
+        return members;
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<AppUser>> GetMember(string id)
     {
-        var user = await context.Users.FindAsync(id);
+        var member = await context.Users.FindAsync(id);
 
-        if (user == null) return NotFound();
+        if (member == null) return NotFound();
 
-        return user;
+        return member;
     }
 }
