@@ -524,3 +524,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 
+API/obj/Debug/net9.0/API.assets.cache
+API/obj/Debug/net9.0/API.AssemblyInfoInputs.cache
+API/obj/rider.project.model.nuget.info
+API/obj/project.nuget.cache
+API/obj/Debug/net9.0/API.GeneratedMSBuildEditorConfig.editorconfig
