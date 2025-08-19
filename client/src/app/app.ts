@@ -4,16 +4,17 @@ import { lastValueFrom } from 'rxjs';
 import { Nav } from "../layout/nav/nav";
 import { AccountService } from '../core/services/account-service';
 import { User } from '../types/user';
-import { Home } from "../features/home/home";
+import { Router, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
-  imports: [Nav, Home],
+  imports: [Nav, RouterOutlet],
 })
 export class App implements OnInit {
   private readonly accountService = inject(AccountService);
+  protected readonly router = inject(Router);
   private readonly http = inject(HttpClient);
   protected readonly title = signal('Dating App');
   protected readonly members = signal<User[]>([]);
