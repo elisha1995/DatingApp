@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "4aMbkCh5pC8=",
+  "dgSpecHash": "OWdLAnwDckk=",
   "success": true,
   "projectFilePath": "/Users/elishasamuelgyamfi/Desktop/DatingApp/API/API.csproj",
   "expectedPackageFiles": [
     "/Users/elishasamuelgyamfi/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.8/microsoft.aspnetcore.authentication.jwtbearer.9.0.8.nupkg.sha512",
     "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.build.framework/17.8.3/microsoft.build.framework.17.8.3.nupkg.sha512",
     "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.build.locator/1.7.8/microsoft.build.locator.1.7.8.nupkg.sha512",
@@ -35,6 +36,8 @@
     "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.identitymodel.abstractions/8.14.0/microsoft.identitymodel.abstractions.8.14.0.nupkg.sha512",
     "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.14.0/microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
     "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.identitymodel.logging/8.14.0/microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
+    "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.identitymodel.protocols/8.0.1/microsoft.identitymodel.protocols.8.0.1.nupkg.sha512",
+    "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/8.0.1/microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
     "/Users/elishasamuelgyamfi/.nuget/packages/microsoft.identitymodel.tokens/8.14.0/microsoft.identitymodel.tokens.8.14.0.nupkg.sha512",
     "/Users/elishasamuelgyamfi/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
     "/Users/elishasamuelgyamfi/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.10/sqlitepclraw.bundle_e_sqlite3.2.1.10.nupkg.sha512",
