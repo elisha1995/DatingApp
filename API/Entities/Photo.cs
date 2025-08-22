@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace API.Entities;
 
 public class Photo
@@ -8,7 +10,7 @@ public class Photo
     public bool IsApproved { get; set; }
 
     // Navigation property
-    //[JsonIgnore]
+    [JsonIgnore]
     public Member Member { get; set; } = null!;
     public string MemberId { get; set; } = null!;
 }
