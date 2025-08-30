@@ -9,11 +9,10 @@ import {
 } from '@angular/router';
 import { Member } from '../../../types/member';
 import { filter } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-member-detailed',
-  imports: [AsyncPipe, RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './member-detailed.html',
   styleUrl: './member-detailed.css',
 })
