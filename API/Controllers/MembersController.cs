@@ -69,7 +69,7 @@ public class MembersController(IMemberRepository memberRepository, IPhotoService
             Url = result.SecureUrl.AbsoluteUri,
             PublicId = result.PublicId,
             MemberId = User.GetMemberId(),
-            // IsApproved = true
+            IsApproved = true
         };
 
         if (member.ImageUrl == null)
@@ -83,5 +83,54 @@ public class MembersController(IMemberRepository memberRepository, IPhotoService
         if (await memberRepository.SaveAllAsync()) return photo;
 
         return BadRequest("Problem adding photo");
+    }
+
+    [HttpPut("set-main-photo/{photoId}")]
+    public async Task<ActionResult> SetMainPhoto(int photoId)
+    {
+        var member = await memberRepository.GetMemberForUpdate(User.GetMemberId());
+
+        if (member == null) return BadRequest("Cannot get member from token");
+
+        var photo = member.Photos.SingleOrDefault(x => x.Id == photoId);
+
+        if (member.ImageUrl == photo?.Url || photo == null)
+        {
+            return BadRequest("Cannot set this as main image");
+        }
+
+        member.ImageUrl = photo.Url;
+        member.User.ImageUrl = photo.Url;
+
+        if (await memberRepository.SaveAllAsync()) return NoContent();
+
+        return BadRequest("Problem setting main photo");
+    }
+
+    [HttpDelete("delete-photo/{photoId}")]
+    public async Task<ActionResult> DeletePhoto(int photoId)
+    {
+        var member = await memberRepository.GetMemberForUpdate(User.GetMemberId());
+
+        if (member == null) return BadRequest("Cannot get member from token");
+
+        var photo = member.Photos.SingleOrDefault(x => x.Id == photoId);
+
+        if (photo == null || photo.Url == member.ImageUrl)
+        {
+            return BadRequest("This photo cannot be deleted");
+        }
+
+        if (photo.PublicId != null)
+        {
+            var result = await photoService.DeletePhotoAsync(photo.PublicId);
+            if (result.Error != null) return BadRequest(result.Error.Message);
+        }
+
+        member.Photos.Remove(photo);
+
+        if (await memberRepository.SaveAllAsync()) return Ok();
+
+        return BadRequest("Problem deleting the photo");
     }
 }
