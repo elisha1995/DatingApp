@@ -523,6 +523,7 @@ FodyWeavers.xsd
 *.msp
 
 # JetBrains Rider
+.idea/
 
 API/obj/Debug/net9.0/API.assets.cache
 API/obj/Debug/net9.0/API.AssemblyInfoInputs.cache
@@ -532,4 +533,9 @@ API/obj/Debug/net9.0/API.GeneratedMSBuildEditorConfig.editorconfig
 API/obj/Debug/net9.0/API.AssemblyInfoInputs.cache
 API/obj/Debug/net9.0/API.AssemblyInfo.cs
 API/obj/Debug/net9.0/API.AssemblyInfoInputs.cache
+API/obj/Debug/net9.0/API.AssemblyInfo.cs
+
+API/appsettings.json
+API/dating.db*
+.idea/.idea.DatingApp/.idea/vcs.xml
 API/obj/Debug/net9.0/API.AssemblyInfo.cs
