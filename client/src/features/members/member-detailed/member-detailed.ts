@@ -7,7 +7,6 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { Member } from '../../../types/member';
 import { filter } from 'rxjs';
 import { AgePipe } from '../../../core/pipes/age-pipe';
 import { AccountService } from '../../../core/services/account-service';
@@ -26,7 +25,6 @@ export class MemberDetailed implements OnInit {
 
   private readonly router = inject(Router);
   protected title = signal<string | undefined>('Profile');
-  protected member = signal<Member | undefined>(undefined);
   private readonly routeId = signal<string | null>(null);
   protected isCurrentUser = computed(() => {
     return this.accountService.currentUser()?.id === this.routeId();
@@ -39,12 +37,6 @@ export class MemberDetailed implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe({
-      next: (data) => {
-        this.member.set(data['member']);
-      },
-    });
-
     this.title.set(this.route.firstChild?.snapshot?.title);
 
     this.router.events

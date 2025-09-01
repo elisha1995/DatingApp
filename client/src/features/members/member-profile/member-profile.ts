@@ -2,12 +2,10 @@ import {
   Component,
   HostListener,
   inject,
-  signal,
   ViewChild,
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { EditableMember, Member } from '../../../types/member';
 import { DatePipe } from '@angular/common';
 import { MemberService } from '../../../core/services/member-service';
@@ -34,9 +32,7 @@ export class MemberProfile implements OnInit, OnDestroy {
 
   private readonly accountService = inject(AccountService);
   protected readonly memberService = inject(MemberService);
-  private readonly route = inject(ActivatedRoute);
   private readonly toast = inject(ToastService);
-  protected readonly member = signal<Member | undefined>(undefined);
   protected editableMember: EditableMember = {
     displayName: '',
     description: '',
@@ -45,9 +41,12 @@ export class MemberProfile implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
-    this.route.parent?.data.subscribe((data) => {
-      this.member.set(data['member']);
-    });
+    this.editableMember = {
+      displayName: this.memberService.member()?.displayName || '',
+      description: this.memberService.member()?.description || '',
+      city: this.memberService.member()?.city || '',
+      country: this.memberService.member()?.country || '',
+    };
   }
 
   updateProfile() {
