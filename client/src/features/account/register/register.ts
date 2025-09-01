@@ -23,7 +23,6 @@ export class Register {
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
   cancelRegister = output<boolean>();
-  protected creds = {} as RegisterCreds;
   protected credentialsForm: FormGroup;
   protected profileForm: FormGroup;
   protected currentStep = signal(1);
