@@ -538,3 +538,4 @@ API/obj/Debug/net9.0/API.AssemblyInfo.cs
 API/appsettings.json
 API/dating.db*
 .idea/.idea.DatingApp/.idea/vcs.xml
+.DS_Store
