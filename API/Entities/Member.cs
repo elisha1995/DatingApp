@@ -17,10 +17,11 @@ public class Member
     public required string Country { get; set; }
 
     // Nav property
-    [JsonIgnore] 
-    public List<Photo> Photos { get; set; } = [];
+    [JsonIgnore] public List<Photo> Photos { get; set; } = [];
 
-    [ForeignKey(nameof(Id))] 
-    [JsonIgnore]
-    public AppUser User { get; set; } = null!;
+    [JsonIgnore] public List<MemberLike> LikedByMembers { get; set; } = [];
+
+    [JsonIgnore] public List<MemberLike> LikedMembers { get; set; } = [];
+
+    [ForeignKey(nameof(Id))] [JsonIgnore] public AppUser User { get; set; } = null!;
 }
