@@ -32,4 +32,15 @@ export class MessageService {
       this.baseUrl + 'messages/thread/' + memberId
     );
   }
+
+  sendMessage(recipientId: string, content: string) {
+    return this.http.post<Message>(this.baseUrl + 'messages', {
+      recipientId,
+      content,
+    });
+  }
+
+  deleteMessage(id: string) {
+    return this.http.delete(this.baseUrl + 'messages/' + id);
+  }
 }
