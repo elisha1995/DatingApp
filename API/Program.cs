@@ -61,6 +61,7 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(x => x
     .AllowAnyMethod()
+    .AllowCredentials()
     .WithOrigins("http://localhost:4200", "https://localhost:4200")
     .AllowAnyHeader());
 
