@@ -13,19 +13,15 @@ public class TokenService(IConfiguration config, UserManager<AppUser> userManage
 {
     public async Task<string> CreateToken(AppUser user)
     {
-        var tokenKey = config["TokenKey"] ?? throw new Exception("Token key is not set.");
-        ;
+        var tokenKey = config["TokenKey"] ?? throw new Exception("Cannot get token key");
         if (tokenKey.Length < 64)
-        {
-            throw new Exception("Token key is too short. It needs be at least 64 characters long.");
-        }
-
+            throw new Exception("Your token key needs to be >= 64 characters");
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
 
         var claims = new List<Claim>
         {
             new(ClaimTypes.Email, user.Email!),
-            new(ClaimTypes.NameIdentifier, user.Id),
+            new(ClaimTypes.NameIdentifier, user.Id)
         };
 
         var roles = await userManager.GetRolesAsync(user);
@@ -37,7 +33,7 @@ public class TokenService(IConfiguration config, UserManager<AppUser> userManage
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddMinutes(7),
+            Expires = DateTime.UtcNow.AddDays(15),
             SigningCredentials = creds
         };
 

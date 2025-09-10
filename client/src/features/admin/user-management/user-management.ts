@@ -1,4 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild, inject, signal } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
 import { AdminService } from '../../../core/services/admin-service';
 import { User } from '../../../types/user';
 
