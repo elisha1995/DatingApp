@@ -16,11 +16,11 @@ import { ConfirmDialogService } from '../../core/services/confirm-dialog-service
 export class Messages implements OnInit {
   private readonly messageService = inject(MessageService);
   private readonly confirmDialog = inject(ConfirmDialogService);
-  protected paginatedMessages = signal<PaginatedResult<Message> | null>(null);
-  protected pageNumber = 1;
-  protected pageSize = 10;
   protected container = 'Inbox';
   protected fetchedContainer = 'Inbox';
+  protected pageNumber = 1;
+  protected pageSize = 10;
+  protected paginatedMessages = signal<PaginatedResult<Message> | null>(null);
 
   tabs = [
     { label: 'Inbox', value: 'Inbox' },
