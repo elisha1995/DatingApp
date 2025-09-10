@@ -29,9 +29,8 @@ export class MemberProfile implements OnInit, OnDestroy {
       $event.preventDefault();
     }
   }
-
   private readonly accountService = inject(AccountService);
-  protected readonly memberService = inject(MemberService);
+  protected memberService = inject(MemberService);
   private readonly toast = inject(ToastService);
   protected editableMember: EditableMember = {
     displayName: '',
