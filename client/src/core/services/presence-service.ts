@@ -7,6 +7,7 @@ import {
   HubConnectionState,
 } from '@microsoft/signalr';
 import { User } from '../../types/user';
+import { Message } from '../../types/message';
 
 @Injectable({
   providedIn: 'root',
@@ -27,12 +28,25 @@ export class PresenceService {
 
     this.hubConnection.start().catch((error) => console.log(error));
 
-    this.hubConnection.on('UserOnline', (email) => {
-      this.toast.success(email + ' has connected');
+    this.hubConnection.on('UserOnline', (userId) => {
+      this.onlineUsers.update((users) => [...users, userId]);
     });
 
-    this.hubConnection.on('UserOffline', (email) => {
-      this.toast.info(email + ' has disconnected');
+    this.hubConnection.on('UserOffline', (userId) => {
+      this.onlineUsers.update((users) => users.filter((x) => x !== userId));
+    });
+
+    this.hubConnection.on('GetOnlineUsers', (userIds) => {
+      this.onlineUsers.set(userIds);
+    });
+
+    this.hubConnection.on('NewMessageReceived', (message: Message) => {
+      this.toast.info(
+        message.senderDisplayName + ' has sent you a new message',
+        10000,
+        message.senderImageUrl,
+        `/members/${message.senderId}/messages`
+      );
     });
   }
 
