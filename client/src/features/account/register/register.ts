@@ -7,7 +7,6 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { RegisterCreds } from '../../../types/user';
 import { AccountService } from '../../../core/services/account-service';
 import { Router } from '@angular/router';
 import { TextInput } from '../../../shared/text-input/text-input';
