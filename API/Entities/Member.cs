@@ -16,7 +16,7 @@ public class Member
     public required string City { get; set; }
     public required string Country { get; set; }
 
-    // Nav property
+    // Navigation property
     [JsonIgnore] public List<Photo> Photos { get; set; } = [];
 
     [JsonIgnore] public List<MemberLike> LikedByMembers { get; set; } = [];
@@ -27,5 +27,6 @@ public class Member
 
     [JsonIgnore] public List<Message> MessagesReceived { get; set; } = [];
 
-    [ForeignKey(nameof(Id))] [JsonIgnore] public AppUser User { get; set; } = null!;
+
+    [JsonIgnore] [ForeignKey(nameof(Id))] public AppUser User { get; set; } = null!;
 }
