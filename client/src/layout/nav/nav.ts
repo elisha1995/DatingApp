@@ -14,16 +14,16 @@ import { HasRole } from '../../shared/directives/has-role';
   styleUrl: './nav.css',
 })
 export class Nav implements OnInit {
-  protected readonly accountService = inject(AccountService);
-
-  protected readonly busyService = inject(BusyService);
+  protected accountService = inject(AccountService);
+  protected busyService = inject(BusyService);
   private readonly router = inject(Router);
-  private readonly toastService = inject(ToastService);
+  private readonly toast = inject(ToastService);
   protected creds: any = {};
   protected selectedTheme = signal<string>(
     localStorage.getItem('theme') || 'light'
   );
   protected themes = themes;
+  protected loading = signal(false);
 
   ngOnInit(): void {
     document.documentElement.setAttribute('data-theme', this.selectedTheme());
@@ -37,16 +37,23 @@ export class Nav implements OnInit {
     if (elem) elem.blur();
   }
 
+  handleSelectUserItem() {
+    const elem = document.activeElement as HTMLDivElement;
+    if (elem) elem.blur();
+  }
+
   login() {
+    this.loading.set(true);
     this.accountService.login(this.creds).subscribe({
       next: () => {
         this.router.navigateByUrl('/members');
-        this.toastService.success('Logged in successfully');
+        this.toast.success('Logged in successfully');
         this.creds = {};
       },
       error: (error) => {
-        this.toastService.error(error.error);
+        this.toast.error(error.error);
       },
+      complete: () => this.loading.set(false),
     });
   }
 
