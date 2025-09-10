@@ -2,6 +2,7 @@ using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
         };
 
         var result = await userManager.CreateAsync(user, registerDto.Password);
+
         if (!result.Succeeded)
         {
             foreach (var error in result.Errors)
@@ -46,7 +48,7 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
         return await user.ToDto(tokenService);
     }
 
-    [HttpPost("login")] // api/account/login
+    [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
         var user = await userManager.FindByEmailAsync(loginDto.Email);
@@ -89,11 +91,27 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Secure = true, // only send over https even in local development
+            Secure = true,
             SameSite = SameSiteMode.Strict,
             Expires = DateTime.UtcNow.AddDays(7)
         };
 
         Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
+    }
+
+    [Authorize]
+    [HttpPost("logout")]
+    public async Task<ActionResult> Logout()
+    {
+        await userManager.Users
+            .Where(x => x.Id == User.GetMemberId())
+            .ExecuteUpdateAsync(setters => setters
+                .SetProperty(x => x.RefreshToken, _ => null)
+                .SetProperty(x => x.RefreshTokenExpiry, _ => null)
+            );
+
+        Response.Cookies.Delete("refreshToken");
+
+        return Ok();
     }
 }
